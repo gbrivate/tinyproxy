@@ -7,4 +7,4 @@ docker run -d \
   -p 127.0.0.1:8888:8888 \
   tinyproxy-secure
 
-# other image https://hub.docker.com/r/vimagick/tinyproxy
+https://hub.docker.com/r/vimagick/tinyproxy
