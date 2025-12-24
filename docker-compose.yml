@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  tinyproxy:
+    image: tinyproxy-secure:1.0
+    container_name: tinyproxy
+
+    ports:
+      - "0.0.0.0:8888:8888"
+
+    restart: unless-stopped
+
+    # File descriptor limits (critical for concurrency)
+    ulimits:
+      nofile:
+        soft: 100000
+        hard: 100000
+
+    # Kernel TCP tuning (container-scoped)
+    sysctls:
+      net.core.somaxconn: 65535
+      net.ipv4.tcp_max_syn_backlog: 65535
+      net.ipv4.ip_local_port_range: "10240 65535"
+      net.ipv4.tcp_tw_reuse: 1
+
+    # Run with immutable filesystem
+    read_only: true
+
+    # Writable runtime paths (tmpfs = RAM-backed, fast)
+    tmpfs:
+      - /run/tinyproxy
+      - /var/log/tinyproxy
+
+    # Drop unnecessary privileges
+    security_opt:
+      - no-new-privileges:true
+
+    # Optional: restrict DNS latency
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+
+    # Basic liveness check
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8888"]
+      interval: 30s
+      timeout: 3s
+      retries: 3

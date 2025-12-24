@@ -1,0 +1,21 @@
+User tinyproxy
+Group tinyproxy
+
+Port 8888
+Listen 0.0.0.0
+
+Timeout 600
+LogLevel Info
+
+# Allow all client IPs
+Allow 0.0.0.0/0
+
+# Disable filtering entirely
+Filter None
+FilterDefaultDeny No
+FilterExtended Off
+
+# Standard forward proxy behavior
+ReverseOnly No
+ReverseMagic No
+
