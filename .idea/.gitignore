@@ -1,0 +1,41 @@
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+.vscode/
+.idea/
+
+# =========================
+# Logs / Runtime
+# =========================
+*.log
+logs/
+var/log/
+run/
+tmp/
+
+# =========================
+# Docker
+# =========================
+.env
+.env.*
+docker-compose.override.yml
+
+# Local Docker data (if used)
+data/
+volumes/
+
+# =========================
+# Tinyproxy
+# =========================
+tinyproxy.pid
+stats.html
+
+# =========================
+# Ce
